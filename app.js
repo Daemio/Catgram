@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
+const usersRouter = require('./routes/users');
+const photosRouter = require('./routes/photos');
+const commentsRouter = require('./routes/comments');
 
-app.get('/hello', (req, res, next) => {
-    res.status(200).json({message: 'hello'});
-});
+app.use('/users', usersRouter);
+app.use('/photos', photosRouter);
+app.use('/comments', commentsRouter);
 
 module.exports = app;
