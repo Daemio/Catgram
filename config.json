@@ -1,0 +1,7 @@
+{
+    "db":{
+        "host":"ds016128.mlab.com:16128/catgram",
+        "user":"catgramer",
+        "password":"catgramer1"
+    }
+}

@@ -1,7 +1,27 @@
 const router = require('express').Router();
+const Photo = require('../models/photo');
+const mongoose = require('mongoose');
 
 router.post('/', (req, res, next) => {
-    res.status(201).json({message: `Photo was created`});
+    const photo = new Photo({
+        _id: new mongoose.Types.ObjectId(),
+        uri: req.body.uri,
+        description: req.body.description,
+        date: Date.now(),
+        //user_id: 'stub'
+    });
+
+    photo.save()
+        .then((doc) => {
+            console.log(doc);
+
+            res.status(201).json(doc);
+        })
+        .catch((err) => {
+            console.log(err);
+
+            res.status(500).json({message: err.message});
+        });
 });
 
 router.get('/:id', (req, res, next) => {
