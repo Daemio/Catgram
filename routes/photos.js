@@ -1,14 +1,15 @@
 const router = require('express').Router();
 const Photo = require('../models/photo');
 const mongoose = require('mongoose');
+const auth = require('../middleware/auth');
 
-router.post('/', (req, res, next) => {
+router.post('/', auth, (req, res, next) => {
     const photo = new Photo({
         _id: new mongoose.Types.ObjectId(),
         uri: req.body.uri,
         description: req.body.description,
         date: Date.now(),
-        //user_id: 'stub'
+        user_id: req.userInfo._id
     });
 
     photo.save()
