@@ -3,5 +3,9 @@
         "host":"ds016128.mlab.com:16128/catgram",
         "user":"catgramer",
         "password":"catgramer1"
+    },
+    "auth":{
+        "tokenSecret":"just_my_fucken_secret",
+        "tokenLifetime":3000
     }
 }
