@@ -6,8 +6,9 @@ const commentsRouter = require('./routes/comments');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
+app.use('/uploads', express.static('uploads'));
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({limit:'5mb', extended: true}));
 app.use(bodyParser.json());
 app.use('/user', userRouter);
 app.use('/photos', photosRouter);
