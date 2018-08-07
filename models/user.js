@@ -5,8 +5,7 @@ const userSchema = mongoose.Schema({
     name: {
         type: String
     },
-    avatar: String,
-    birthday: Date,
+    avatarPath: String,
     email: { 
         type: String, 
         required: true, 
