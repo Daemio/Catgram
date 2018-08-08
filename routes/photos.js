@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const auth = require('../middleware/auth');
 const _ = require('lodash');
 const upload = require('../middleware/upload');
+const fs = require('fs');
 
 router.post('/', auth, upload.single('photo'), (req, res, next) => {
     if(!req.file) {
@@ -59,7 +60,7 @@ router.patch('/:id', auth, (req, res, next) => {
                 Photo.update({_id:req.params.id}, {description:description})
                     .exec()
                     .then((result) => {
-                        res.status(200).json({photo: photo, message:'Successfully removed'});
+                        res.status(200).json({photo: photo, message:'Successfully updated'});
                     });
             } else {
                 res.status(403).json({message: 'You can modify only your photos'});
@@ -77,6 +78,7 @@ router.delete('/:id', auth, (req, res, next) => {
         .exec()
         .then((photo) => {
             if(photo.user_id == req.userID) {
+                fs.unlinkSync(photo.photoPath);
                 Photo.remove({_id:req.params.id})
                     .exec()
                     .then((result) => {
